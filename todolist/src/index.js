@@ -4,9 +4,7 @@ import TodoList from './TodoList';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <TodoList />
-  </React.StrictMode>,
+    <TodoList />,
   document.getElementById('root')
 );
 

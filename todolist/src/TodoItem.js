@@ -6,6 +6,12 @@ class TodoItem extends Component {
     super(props);
     this.handleClick = this.handleClick.bind(this);
   }
+  shouldComponentUpdate(nextProps, nextState){
+    if(nextProps.content !== this.props.content){
+      return true
+    }
+    return false
+  }
   render(){
     return <li onClick={this.handleClick}>{this.props.content}</li>
   }

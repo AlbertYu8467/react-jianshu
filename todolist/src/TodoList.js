@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import './style.css'
 import TodoItem  from './TodoItem'
+import Trans from './Trans'
 
 class TodoList extends Component {
   constructor(props){
@@ -19,13 +20,15 @@ class TodoList extends Component {
     return (
       <Fragment>
         <label htmlFor="insert">输入内容</label>
-        <input id="insert" className="input" value={this.state.inputValue} 
+        <input ref={(input) => this.input = input} id="insert" className="input" value={this.state.inputValue} 
         onChange={this.handleInputChange}
         />
         <button onClick={this.handleBtnClick}>提交</button>
         <ul>
           { this.getTodoItem() }
         </ul>
+        <hr />
+        <Trans />
       </Fragment>
     )
   }
