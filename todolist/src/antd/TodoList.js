@@ -1,52 +1,32 @@
 import React, { Component } from 'react';
-import 'antd/dist/antd.css'
-import TodoListUI from './TodoListUI'
-import store from '../store';
-
-import {getAddItemAction, getInputChangeAction,getDelItemAction, getTodoList} from '../store/actionCreator';
+import { connect } from 'react-redux';
 class TodoList extends Component {
-  constructor(props){
-    super(props)
-    this.state = store.getState()
-    this.handleInputChange = this.handleInputChange.bind(this)
-    this.handleBtnClick = this.handleBtnClick.bind(this)
-    this.handleDelItem = this.handleDelItem.bind(this)
-
-    this.handleStoreChange = this.handleStoreChange.bind(this)
-    store.subscribe(this.handleStoreChange);
-  }
   render(){
     return (
-      <TodoListUI 
-      inputValue={this.state.inputValue} 
-      handleInputChange={this.handleInputChange}
-      handleBtnClick={this.handleBtnClick}
-      handleDelItem={this.handleDelItem}
-      list={this.state.list}
-      />
+      <div>
+        <input inputValue={this.props.inputValue} onChange={this.props.changeInputVaue}/>
+      </div>
     )
   }
- 
-  componentDidMount(){
-    const action = getTodoList();
-    store.dispatch(action);
-  }
+}
 
-  handleInputChange(e){
-    const action = getInputChangeAction(e.target.value)
-    store.dispatch(action);
-  }
-
-  handleBtnClick(){
-    const action = getAddItemAction()
-    store.dispatch(action);
-  }
-  handleDelItem(index){
-    const action = getDelItemAction(index)
-    store.dispatch(action);
-  }
-  handleStoreChange(){
-    this.setState(store.getState())
+const  mapStateProps = (state) => {
+  return {
+    inputValue: state.inputValue
   }
 }
-export default TodoList
+
+// store.dispatch
+const mapDispatchToProps = (dispatch) => {
+  return {
+    changeInputVaue(e) {
+      console.log(e.target.value)
+      const action = {
+        type:'',
+        value:''
+      }
+      // dispatch();
+    }
+  }
+}
+export default connect(mapStateProps,mapDispatchToProps)(TodoList)
